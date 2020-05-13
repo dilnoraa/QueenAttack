@@ -1,13 +1,11 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-class Solution
-{
+class Solution {
 
-
-    static void Main(String[] args)
-    {
+    static void Main(String[] args) {
         string[] tokens_n = Console.ReadLine().Split(' ');
         int n = Convert.ToInt32(tokens_n[0]);
         int k = Convert.ToInt32(tokens_n[1]);
@@ -16,17 +14,14 @@ class Solution
         int cQueen = Convert.ToInt32(tokens_rQueen[1]);
         int[] rDizi = new int[k];
         int[] cDizi = new int[k];
-        for (int a0 = 0; a0 < k; a0++)
-        {
+        for (int a0 = 0; a0 < k; a0++) {
             string[] tokens_rObstacle = Console.ReadLine().Split(' ');
             rDizi[a0] = Convert.ToInt32(tokens_rObstacle[0]);
             cDizi[a0] = Convert.ToInt32(tokens_rObstacle[1]);
-            //  int rObstacle = Convert.ToInt32(tokens_rObstacle[0]);
-            // int cObstacle = Convert.ToInt32(tokens_rObstacle[1]);
-            // your code goes here
+          
         }
 
-        bool[,] board = new bool[n, n];
+        bool[, ] board = new bool[n, n];
 
         int sayac = 0;
 
@@ -34,94 +29,66 @@ class Solution
             for (int j = 0; j < n; j++)
                 board[i, j] = true;
 
-        if (n > 1)
-        {
+        if (n > 1) {
             int rowQueen = n - rQueen;
             int columnQueen = cQueen - 1;
             //   board[rowQueen,columnQueen]=1;
-
             //  Console.WriteLine("int:" + rDizi[0] + cDizi[0]);
 
-            if (k > 0 && k - 1 < n * n)
-            {
-                for (int i = 0; i < k; i++)
-                {
+            if (k > 0 && k - 1 < n * n) {
+                for (int i = 0; i < k; i++) {
                     int rowO = n - rDizi[i];
                     int columnO = cDizi[i] - 1;
                     board[rowO, columnO] = false;
                 }
             }
-            /* for(int i=0; i<n; i++) {
-             for(int j=0;j<n; j++)
-                 Console.Write(board[i,j]+" ");
-                 Console.WriteLine();
-             }*/
+          
 
-            for (int i = rowQueen - 1; i >= 0; i--)
-            { //yukarı
-
+            for (int i = rowQueen - 1; i >= 0; i--) { //yukarı
                 bool hucre = board[i, columnQueen];
                 if (hucre == false)
                     break;
-
                 else
                     sayac++;
-
             }
 
-
-            for (int i = rowQueen + 1; i < n; i++)
-            { // asagi
+            for (int i = rowQueen + 1; i < n; i++) { // asagi
                 bool hucre = board[i, columnQueen];
 
                 if (hucre == false)
                     break;
-
                 else
                     sayac++;
             }
 
-
-            for (int i = columnQueen + 1; i < n; i++)
-            { // sag
+            for (int i = columnQueen + 1; i < n; i++) { 
                 bool hucre = board[rowQueen, i];
 
                 if (hucre == false)
                     break;
-
                 else
                     sayac++;
             }
 
-
-            for (int i = columnQueen - 1; i >= 0; i--)
-            { // sola
+            for (int i = columnQueen - 1; i >= 0; i--) { 
                 bool hucre = board[rowQueen, i];
 
                 if (hucre == false)
                     break;
-
                 else
                     sayac++;
             }
-
-
 
             int a = rowQueen;
             int b = columnQueen;
             a--;
             b++;
-            while (a >= 0 && b < n)
-            { // yukarı-saga
+            while (a >= 0 && b < n) { 
                 bool hucre = board[a, b];
-
                 if (hucre == false)
                     break;
-
                 else
                     sayac++;
-
-
                 a--;
                 b++;
             }
@@ -130,8 +97,7 @@ class Solution
             b = columnQueen;
             a++;
             b++;
-            while (a < n && b < n)
-            { // asagı-saga
+            while (a < n && b < n) { 
                 bool hucre = board[a, b];
 
                 if (hucre == false)
@@ -139,7 +105,6 @@ class Solution
 
                 else
                     sayac++;
-
 
                 a++;
                 b++;
@@ -151,8 +116,7 @@ class Solution
             a++;
             b--;
 
-            while (a < n && b >= 0)
-            { // asagı- sola
+            while (a < n && b >= 0) { 
                 bool hucre = board[a, b];
 
                 if (hucre == false)
@@ -160,8 +124,6 @@ class Solution
 
                 else
                     sayac++;
-
-
                 a++;
                 b--;
             }
@@ -169,8 +131,7 @@ class Solution
             b = columnQueen;
             a--;
             b--;
-            while (a >= 0 && b >= 0)
-            { // yukari-sola
+            while (a >= 0 && b >= 0) { // yukari-sola
                 bool hucre = board[a, b];
                 if (hucre == false)
                     break;
@@ -181,9 +142,7 @@ class Solution
                 b--;
             }
             Console.WriteLine(sayac);
-        }
-        else
-        {
+        } else {
             Console.WriteLine(sayac);
 
         }
